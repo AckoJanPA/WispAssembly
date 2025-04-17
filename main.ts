@@ -1,35 +1,37 @@
 //ALERT: do NOT set registers to booleans or strings, they only accept numbers
 //It will NOT show an error but it is very important to keep this rule
 
+const code: string[] = []
+
 let RUNNING = true
 
 let registers = {
-    "A": 0,
-    "B": 0,
-    "C": 0,
-    "D": 0,
-    "E": 0,
-    "F": 0,
-    "G": 0,
-    "H": 0,
-    "I": 0,
-    "J": 0,
-    "K": 0,
-    "L": 0,
-    "M": 0,
-    "N": 0,
-    "O": 0,
-    "P": 0,
-    "Q": 0,
-    "R": 0,
-    "S": 0,
-    "T": 0,
-    "U": 0,
-    "V": 0,
-    "W": 0,
-    "X": 0,
-    "Y": 0,
-    "Z": 0
+  A: 0,
+  B: 0,
+  C: 0,
+  D: 0,
+  E: 0,
+  F: 0,
+  G: 0,
+  H: 0,
+  I: 0,
+  J: 0,
+  K: 0,
+  L: 0,
+  M: 0,
+  N: 0,
+  O: 0,
+  P: 0,
+  Q: 0,
+  R: 0,
+  S: 0,
+  T: 0,
+  U: 0,
+  V: 0,
+  W: 0,
+  X: 0,
+  Y: 0,
+  Z: 0,
 }
 
 let operand1 = 0
@@ -39,7 +41,7 @@ let instructions: any[] = []
 
 let InsID = 0
 
-console.log("Registers: ", registers);
+console.log("Registers: ", registers)
 
 /* --- ASSEMBLY CODE --- 
 
@@ -75,220 +77,211 @@ PRO (target) - sets the value of target to prompt the user for input
 */
 
 const ASSEMBLY = {
-    add: function (target: string) {
-        registers[target] = operand1 + operand2
-    },
-    sub: function (target: string) {
-        registers[target] = operand1 - operand2
-    },
-    mul: function (target: string) {
-        registers[target] = operand1 * operand2
-    },
-    div: function (target: string) {
-        registers[target] = operand1 / operand2
-    },
-    set: function (target: string, value: number) {
-        registers[target] = Number(value)
-    },
-    mov: function (target: string, source: string) {
-        registers[target] = registers[source]
-    },
-    jmp: function (line: number) {
-        InsID = line
-    },
-    jie: function (line: number) {
-        if (operand1 === operand2) {
-            InsID = line
-        }
-    },
-    jne: function (line: number) {
-        if (operand1 !== operand2) {
-            InsID = line
-        }
-    },
-    jlt: function (line: number) {
-        if (operand1 < operand2) {
-            InsID = line
-        }
-    },
-    jgt: function (line: number) {
-        if (operand1 > operand2) {
-            InsID = line
-        }
-    },
-    jle: function (line: number) {
-        if (operand1 <= operand2) {
-            InsID = line
-        }
-    },
-    jge: function (line: number) {
-        if (operand1 >= operand2) {
-            InsID = line
-        }
-    },
-    jrmp: function (source: string) {
-        InsID = registers[source]
-    },
-    jrie: function (source: string) {
-        if (operand1 === operand2) {
-            InsID = registers[source]
-        }
-    },
-    jrne: function (source: string) {
-        if (operand1 !== operand2) {
-            InsID = registers[source]
-        }
-    },
-    jrlt: function (source: string) {
-        if (operand1 < operand2) {
-            InsID = registers[source]
-        }
-    },
-    jrgt: function (source: string) {
-        if (operand1 > operand2) {
-            InsID = registers[source]
-        }
-    },
-    jrle: function (source: string) {
-        if (operand1 <= operand2) {
-            InsID = registers[source]
-        }
-    },
-    jrge: function (source: string) {
-        if (operand1 >= operand2) {
-            InsID = registers[source]
-        }
-    },
-    ld1: function (source: string) {
-        operand1 = registers[source]
-    },
-    ld2: function (source: string) {
-        operand2 = registers[source]
-    },
-    alr: function (source: string) {
-        alert(registers[source])
-    },
-    pro: function (target: string) {
-        let value = prompt("Enter a value for " + target)
-        if (value !== null) {
-            registers[target] = Number(value)
-        }
+  add: function (target: string) {
+    registers[target] = operand1 + operand2
+  },
+  sub: function (target: string) {
+    registers[target] = operand1 - operand2
+  },
+  mul: function (target: string) {
+    registers[target] = operand1 * operand2
+  },
+  div: function (target: string) {
+    registers[target] = operand1 / operand2
+  },
+  set: function (target: string, value: number) {
+    registers[target] = Number(value)
+  },
+  mov: function (target: string, source: string) {
+    registers[target] = registers[source]
+  },
+  jmp: function (line: number) {
+    InsID = line
+  },
+  jie: function (line: number) {
+    if (operand1 === operand2) {
+      InsID = line
     }
+  },
+  jne: function (line: number) {
+    if (operand1 !== operand2) {
+      InsID = line
+    }
+  },
+  jlt: function (line: number) {
+    if (operand1 < operand2) {
+      InsID = line
+    }
+  },
+  jgt: function (line: number) {
+    if (operand1 > operand2) {
+      InsID = line
+    }
+  },
+  jle: function (line: number) {
+    if (operand1 <= operand2) {
+      InsID = line
+    }
+  },
+  jge: function (line: number) {
+    if (operand1 >= operand2) {
+      InsID = line
+    }
+  },
+  jrmp: function (source: string) {
+    InsID = registers[source]
+  },
+  jrie: function (source: string) {
+    if (operand1 === operand2) {
+      InsID = registers[source]
+    }
+  },
+  jrne: function (source: string) {
+    if (operand1 !== operand2) {
+      InsID = registers[source]
+    }
+  },
+  jrlt: function (source: string) {
+    if (operand1 < operand2) {
+      InsID = registers[source]
+    }
+  },
+  jrgt: function (source: string) {
+    if (operand1 > operand2) {
+      InsID = registers[source]
+    }
+  },
+  jrle: function (source: string) {
+    if (operand1 <= operand2) {
+      InsID = registers[source]
+    }
+  },
+  jrge: function (source: string) {
+    if (operand1 >= operand2) {
+      InsID = registers[source]
+    }
+  },
+  ld1: function (source: string) {
+    operand1 = registers[source]
+  },
+  ld2: function (source: string) {
+    operand2 = registers[source]
+  },
+  alr: function (source: string) {
+    alert(registers[source])
+  },
+  pro: function (target: string) {
+    let value = prompt("Enter a value for " + target)
+    if (value !== null) {
+      registers[target] = Number(value)
+    }
+  },
 }
 
 function loadInstructions(compiledCode: any[]) {
-    // Load the instructions into memory
-    // Yes it's very simple :)
-    instructions = compiledCode
-
+  // Load the instructions into memory
+  // Yes it's very simple :)
+  instructions = compiledCode
 }
 
 function executeInstruction(id: number) {
-    // Execute the instruction
-    let instruction = instructions[id]
-    let func = instruction[0]
-    let val1 = instruction[1]
-    let val2 = instruction[2]
+  // Execute the instruction
+  let instruction = instructions[id]
+  let func = instruction[0]
+  let val1 = instruction[1]
+  let val2 = instruction[2]
 
-    if (func === "ADD") {
-        ASSEMBLY.add(val1)
-    }
-    if (func === "SUB") {
-        ASSEMBLY.sub(val1)
-    }
-    if (func === "MUL") {
-        ASSEMBLY.mul(val1)
-    }
-    if (func === "DIV") {
-        ASSEMBLY.div(val1)
-    }
-    if (func === "SET") {
-        ASSEMBLY.set(val1, val2)
-    }
-    if (func === "MOV") {
-        ASSEMBLY.mov(val1, val2)
-    }
-    if (func === "JMP") {
-        ASSEMBLY.jmp(val1)
-    }
-    if (func === "JIE") {
-        ASSEMBLY.jie(val1)
-    }
-    if (func === "JNE") {
-        ASSEMBLY.jne(val1)
-    }
-    if (func === "JLT") {
-        ASSEMBLY.jlt(val1)
-    }
-    if (func === "JGT") {
-        ASSEMBLY.jgt(val1)
-    }
-    if (func === "JLE") {
-        ASSEMBLY.jle(val1)
-    }
-    if (func === "JGE") {
-        ASSEMBLY.jge(val1)
-    }
-    if (func === "JrMP") {
-        ASSEMBLY.jrmp(val1)
-    }
-    if (func === "JrIE") {
-        ASSEMBLY.jrie(val1)
-    }
-    if (func === "JrNE") {
-        ASSEMBLY.jrne(val1)
-    }
-    if (func === "JrLT") {
-        ASSEMBLY.jrlt(val1)
-    }
-    if (func === "JrGT") {
-        ASSEMBLY.jrgt(val1)
-    }
-    if (func === "JrLE") {
-        ASSEMBLY.jrle(val1)
-    }
-    if (func === "JrGE") {
-        ASSEMBLY.jrge(val1)
-    }
-    if (func === "LD1") {
-        ASSEMBLY.ld1(val1)
-    }
-    if (func === "LD2") {
-        ASSEMBLY.ld2(val1)
-    }
-    if (func === "ALR") {
-        ASSEMBLY.alr(val1)
-    }
-    if (func === "PRO") {
-        ASSEMBLY.pro(val1)
-    }
+  if (func === "ADD") {
+    ASSEMBLY.add(val1)
+  }
+  if (func === "SUB") {
+    ASSEMBLY.sub(val1)
+  }
+  if (func === "MUL") {
+    ASSEMBLY.mul(val1)
+  }
+  if (func === "DIV") {
+    ASSEMBLY.div(val1)
+  }
+  if (func === "SET") {
+    ASSEMBLY.set(val1, val2)
+  }
+  if (func === "MOV") {
+    ASSEMBLY.mov(val1, val2)
+  }
+  if (func === "JMP") {
+    ASSEMBLY.jmp(val1)
+  }
+  if (func === "JIE") {
+    ASSEMBLY.jie(val1)
+  }
+  if (func === "JNE") {
+    ASSEMBLY.jne(val1)
+  }
+  if (func === "JLT") {
+    ASSEMBLY.jlt(val1)
+  }
+  if (func === "JGT") {
+    ASSEMBLY.jgt(val1)
+  }
+  if (func === "JLE") {
+    ASSEMBLY.jle(val1)
+  }
+  if (func === "JGE") {
+    ASSEMBLY.jge(val1)
+  }
+  if (func === "JrMP") {
+    ASSEMBLY.jrmp(val1)
+  }
+  if (func === "JrIE") {
+    ASSEMBLY.jrie(val1)
+  }
+  if (func === "JrNE") {
+    ASSEMBLY.jrne(val1)
+  }
+  if (func === "JrLT") {
+    ASSEMBLY.jrlt(val1)
+  }
+  if (func === "JrGT") {
+    ASSEMBLY.jrgt(val1)
+  }
+  if (func === "JrLE") {
+    ASSEMBLY.jrle(val1)
+  }
+  if (func === "JrGE") {
+    ASSEMBLY.jrge(val1)
+  }
+  if (func === "LD1") {
+    ASSEMBLY.ld1(val1)
+  }
+  if (func === "LD2") {
+    ASSEMBLY.ld2(val1)
+  }
+  if (func === "ALR") {
+    ASSEMBLY.alr(val1)
+  }
+  if (func === "PRO") {
+    ASSEMBLY.pro(val1)
+  }
 
-    // Add more instructions here
-
+  // Add more instructions here
 }
 
 function runInstructions() {
-    // Run the instructions
-    while (RUNNING) {
-        executeInstruction(InsID)
-        InsID++
-        if (InsID >= instructions.length) {
-            RUNNING = false
-        }
+  // Run the instructions
+  while (RUNNING) {
+    executeInstruction(InsID)
+    InsID++
+    if (InsID >= instructions.length) {
+      RUNNING = false
     }
+  }
 }
 
 function runCompiled(compiledCode: any[]) {
-    loadInstructions(compiledCode)
-    runInstructions()
+  loadInstructions(compiledCode)
+  runInstructions()
 }
 
 // Example usage
-runCompiled([
-    ["SET", "A", 5],
-    ["SET", "B", 10],
-    ["LD1", "A"],
-    ["LD2", "B"],
-    ["ADD", "C"],
-    ["ALR", "C"]
-])
+runCompiled([code])
