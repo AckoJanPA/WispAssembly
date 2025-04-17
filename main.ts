@@ -284,4 +284,4 @@ function runCompiled(compiledCode: any[]) {
 }
 
 // Example usage
-runCompiled([code])
+runCompiled(code)
