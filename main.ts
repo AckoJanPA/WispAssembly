@@ -1,7 +1,7 @@
 //ALERT: do NOT set registers to booleans or strings, they only accept numbers
 //It will NOT show an error but it is very important to keep this rule
 
-const code: string[] = []
+const code: any[] = []
 
 let RUNNING = true
 
